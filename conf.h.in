@@ -1,0 +1,31 @@
+
+#if @LUSERHWDR@-1 == 0
+#define LUSERS_ROUTINES_PRESENT 1
+#else
+#define LUSERS_ROUTINES_PRESENT 0
+#endif
+
+#if @WUSERHWDR@-1 == 0
+#define WUSERS_ROUTINES_PRESENT 1
+#else
+#define WUSERS_ROUTINES_PRESENT 0
+#endif
+
+
+#if @LUSERHWDEF@-1 == 0
+#define LUSERS_DEFINES_PRESENT 1
+#else
+#define LUSERS_DEFINES_PRESENT 0
+#endif
+
+#if @WUSERHWDEF@-1 == 0
+#define WUSERS_DEFINES_PRESENT 1
+#else
+#define WUSERS_DEFINES_PRESENT 0
+#endif
+
+#if @USEREXTRA@-1 == 0
+#define USERS_EXTRA_PRESENT 1
+#else
+#define USERS_EXTRA_PRESENT 0
+#endif

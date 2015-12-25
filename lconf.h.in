@@ -1,0 +1,103 @@
+
+#if DARWIN == 1
+#include <mach/machine.h>
+#include <sys/dtrace.h>
+#endif
+
+#include <sys/ioctl.h>
+
+
+#if @OSSN@-1 == 0
+#include "/usr/lib/oss/soundcard.h"
+#define SOUND_OSS
+
+#elif @OSSN@-2 == 0
+#include "/usr/lib/oss/include/sys/soundcard.h"
+#define SOUND_OSS
+
+#elif @OSSN@-3 == 0
+#include "/usr/local/lib/oss/soundcard.h" 
+#define SOUND_OSS
+
+#elif @OSSN@-4 == 0
+#include "/usr/local/lib/oss/include/sys/soundcard.h" 
+#define SOUND_OSS
+
+#elif @OSSN@-5 == 0
+#include "/lib/oss/soundcard.h"
+#define SOUND_OSS
+
+#elif @OSSN@-6 == 0
+#include "/lib/oss/include/sys/soundcard.h"
+#define SOUND_OSS
+
+#elif @OSSN@-7 == 0
+#include "/var/lib/oss/soundcard.h" 
+#define SOUND_OSS
+
+#elif @OSSN@-8 == 0
+#include "/var/lib/oss/include/sys/soundcard.h" 
+#define SOUND_OSS
+
+#elif @OSSN@-9 == 0
+#include "/opt/oss/soundcard.h" 
+#define SOUND_OSS
+
+#elif @OSSN@-10 == 0
+#include "/opt/oss/include/sys/soundcard.h" 
+#define SOUND_OSS
+
+#elif @OSSN@-11 == 0
+#include "/root/oss/soundcard.h" 
+#define SOUND_OSS
+
+#elif @OSSN@-12 == 0
+#include "/root/oss/include/sys/soundcard.h" 
+#define SOUND_OSS
+
+#else
+#if IA64 == 0
+#if @OSS32_H@ == 1
+#include <sys/soundcard.h>
+#define HAVE_OSS 1
+#else
+#define HAVE_OSS 0
+#endif
+#else
+#if @OSS64_H@ == 1
+#include <sys/soundcard.h>
+#define HAVE_OSS 1
+#else
+#define HAVE_OSS 0
+#endif
+#endif
+#endif
+
+#ifdef SOUND_OSS
+#define HAVE_OSS 1
+#endif
+
+#if HAVE_OSS == 1
+extern audio_buf_info da_info;
+#define SND_DEV "@SDEVPATH@"
+#endif
+
+#if @XFLUSH_OK@ - 1 == 0
+  #define USE_XFLUSH 1
+#else
+  #define USE_XFLUSH 0
+#endif
+
+#if IA64 == 0
+  #if @XKBLIB_32_OK@ -1 == 0
+    #define HAVE_XKBLIB32 1
+  #else
+    #define HAVE_XKBLIB32 0
+  #endif
+#else
+  #if @XKBLIB_64_OK@ -1 == 0
+    #define HAVE_XKBLIB64 1
+  #else
+    #define HAVE_XKBLIB64 0
+  #endif
+#endif
